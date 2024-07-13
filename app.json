@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "firebase_auth_tutorial",
+    "slug": "firebase_auth_tutorial",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Allow the app to access your microphone"
+      },
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "android": {
+      "permissions": ["RECORD_AUDIO", "INTERNET"],
+      "package": "com.anonymous.firebase_auth_tutorial",
+      "googleServicesFile": "./google-services.json"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-firebase-core",
+        {
+          "apiKey": "AIzaSyBmM5w7JJSAqAC3WCKCykrsdzkwhH-gIxQ",
+          "authDomain": "loginapp-1c095.firebaseapp.com",
+          "projectId": "loginapp-1c095",
+          "storageBucket": "loginapp-1c095.appspot.com",
+          "messagingSenderId": "398823817487",
+          "appId": "1:398823817487:web:d8327617a3fe4c8a05be7a",
+          "measurementId": "G-R03EJX5M8G"
+        }
+      ]
+    ]
+  }
+}
