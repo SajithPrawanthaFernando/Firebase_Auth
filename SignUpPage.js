@@ -31,7 +31,6 @@ const SignUpPage = ({
   const [hasMinLength, setHasMinLength] = useState(false);
 
   const handleSignUp = () => {
-    // Password validation checks
     const lowercaseRegex = /^(?=.*[a-z])/;
     const uppercaseRegex = /^(?=.*[A-Z])/;
     const numberRegex = /^(?=.*[0-9])/;

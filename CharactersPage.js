@@ -23,15 +23,10 @@ const AuthenticatedScreen = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.iconButton}
-        onPress={navigateToProfile} // Handle icon button press here
-      >
+      <TouchableOpacity style={styles.iconButton} onPress={navigateToProfile}>
         <Ionicons name="md-settings" size={24} color="white" />
       </TouchableOpacity>
       <View style={styles.authContainer}>
-        {/* Icon button */}
-
         {user ? (
           <>
             <Text style={styles.title}>Welcome {user.name}!</Text>
@@ -40,7 +35,7 @@ const AuthenticatedScreen = ({
                 {fetchedData.map((item, index) => (
                   <View key={index} style={styles.card}>
                     <Image
-                      source={{ uri: item.imageUrl }} // Replace with your image URL field
+                      source={{ uri: item.imageUrl }}
                       style={styles.cardImage}
                     />
                     <Text style={styles.cardText}>
@@ -81,15 +76,14 @@ const CharactersPage = ({ user, handleAuthentication }) => {
   const [currentScreen, setCurrentScreen] = useState("characters");
 
   useEffect(() => {
-    // Fetch data after successful login
     fetch("https://thronesapi.com/api/v2/Characters")
       .then((response) => response.json())
       .then((data) => {
-        setFetchedData(data); // Store fetched data in state
+        setFetchedData(data);
       })
       .catch((error) => {
         console.error("Error fetching characters:", error);
-        // Handle error
+
         Alert.alert("Error", "Failed to fetch characters data.");
       });
   }, []);

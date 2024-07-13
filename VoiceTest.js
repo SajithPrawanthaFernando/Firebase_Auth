@@ -11,23 +11,19 @@ class VoiceTest extends Component {
   }
 
   componentWillUnmount() {
-    // Clean up voice recognition listeners
     Voice.removeAllListeners();
   }
 
   onSpeechStartHandler(e) {
     console.log("Speech started");
-    // Handle speech start event
   }
 
   onSpeechEndHandler(e) {
     console.log("Speech ended");
-    // Handle speech end event
   }
 
   onSpeechResultsHandler(e) {
     console.log("Speech results:", e.value);
-    // Handle speech results, e.value is an array of recognized words
   }
 
   onStartButtonPress() {

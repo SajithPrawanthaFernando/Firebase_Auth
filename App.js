@@ -14,7 +14,6 @@ import SignUpPage from "./SignUpPage";
 import AuthenticatedScreen from "./CharactersPage";
 import Profile from "./Profile";
 
-// Firebase configuration - replace with your actual Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBmM5w7JJSAqAC3WCKCykrsdzkwhH-gIxQ",
   authDomain: "loginapp-1c095.firebaseapp.com",
@@ -25,7 +24,6 @@ const firebaseConfig = {
   measurementId: "G-R03EJX5M8G",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -35,23 +33,21 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [cpassword, setcPassword] = useState("");
-  const [user, setUser] = useState(null); // Track user authentication state
-  const [userData, setUserData] = useState(null); // Track additional user data
-  const [currentPage, setCurrentPage] = useState("login"); // Track current page
-  const [showStartScreen, setShowStartScreen] = useState(true); // Track whether to show start screen
-
+  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [currentPage, setCurrentPage] = useState("login");
+  const [showStartScreen, setShowStartScreen] = useState(true);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
         await fetchUserData(user.uid);
-        setCurrentPage("characters"); // Redirect to characters page after login
+        setCurrentPage("characters");
       } else {
-        setCurrentPage("login"); // Redirect to login page if no user
+        setCurrentPage("login");
       }
     });
 
-    // Simulate start screen for 3 seconds
     setTimeout(() => {
       setShowStartScreen(false);
     }, 3000);
@@ -64,10 +60,10 @@ const App = () => {
     const userDoc = await getDoc(doc(db, "users", uid));
 
     if (userDoc.exists()) {
-      const userData = userDoc.data(); // Retrieve all user data from Firestore
-      console.log("User data found:", userData); // Check console for correct data
+      const userData = userDoc.data();
+      console.log("User data found:", userData);
       setUserData(userData);
-      setUser(userData); // Set userData state correctly
+      setUser(userData);
     } else {
       console.log("No such user document!");
     }
@@ -76,18 +72,14 @@ const App = () => {
   const handleAuthentication = async () => {
     try {
       if (user) {
-        // If user is already authenticated, log out
         console.log("User logged out successfully!");
         await signOut(auth);
-        setCurrentPage("login"); // Redirect to login page after logout
+        setCurrentPage("login");
       } else {
-        // Sign in or sign up
         if (currentPage === "login") {
-          // Sign in
           await signInWithEmailAndPassword(auth, email, password);
           console.log("User signed in successfully!");
         } else if (currentPage === "signup") {
-          // Sign up
           if (password === cpassword) {
             const userCredential = await createUserWithEmailAndPassword(
               auth,
@@ -96,7 +88,6 @@ const App = () => {
             );
             const user = userCredential.user;
 
-            // Save additional user data in Firestore
             await setDoc(doc(db, "users", user.uid), {
               name: name,
               email: email,
@@ -165,7 +156,7 @@ const App = () => {
       )}
       {currentPage === "profile" && (
         <Profile
-          user={userData} // Pass userData directly to user prop
+          user={userData}
           handleAuthentication={handleAuthentication}
           navigateBack={() => setCurrentPage("characters")}
         />
